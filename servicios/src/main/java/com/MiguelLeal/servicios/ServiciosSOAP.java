@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.MiguelLeal.dto.Usuario;
 
-import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
-import jakarta.jws.WebService;
 
 
 public interface ServiciosSOAP{

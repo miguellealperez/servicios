@@ -18,8 +18,13 @@ public class Universidad implements Serializable{
     public String getNit() {
         return nit;
     }
+
     public void setNit(String nit) {
         this.nit = nit;
+    }
+    
+    //empty o default constructor
+    public Universidad() {
     }
     
 }
