@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ServiciosApplication",
+            "request": "launch",
+            "mainClass": "com.MiguelLeal.principal.ServiciosApplication",
+            "projectName": "servicios"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiciosApplication<servicios>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.MiguelLeal.principal.ServiciosApplication",
+            "projectName": "servicios",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
