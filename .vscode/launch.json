@@ -4,6 +4,13 @@
             "type": "java",
             "name": "ServiciosApplication",
             "request": "launch",
+            "mainClass": "com.MiguelLeal.ServiciosApplication",
+            "projectName": "servicios"
+        },
+        {
+            "type": "java",
+            "name": "ServiciosApplication",
+            "request": "launch",
             "mainClass": "com.MiguelLeal.principal.ServiciosApplication",
             "projectName": "servicios"
         },
