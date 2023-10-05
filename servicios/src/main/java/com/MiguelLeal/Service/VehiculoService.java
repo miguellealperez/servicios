@@ -29,8 +29,18 @@ public class VehiculoService {
         return vehiculoRepo.findById(placa).orElse(null);
     }
 
-    public VehiculoEntity saveVehiculo(VehiculoEntity vehiculo) {
-        return vehiculoRepo.save(vehiculo);
+    public String saveVehiculo(VehiculoEntity vehiculo) {
+        if (vehiculoRepo.findById(vehiculo.getPlaca()).orElse(null) != null) {
+            return "Vehiculo ya existe";
+        }else if(vehiculo.getPlaca().length() != 6){
+            return "Placa debe tener 6 caracteres";
+        }else if(vehiculo.getModelo() < 1950 || vehiculo.getModelo() > 2022){
+            return "Modelo debe estar entre 1950 y 2022";
+        }else if(vehiculo.getPrecio() < 0){
+            return "Precio debe ser mayor a 0";
+        }
+        vehiculoRepo.save(vehiculo);
+        return "Vehiculo guardado: " + vehiculo.getPlaca();
     }
 
     public String deleteVehiculo(String placa) {
@@ -40,8 +50,25 @@ public class VehiculoService {
 
     public VehiculoEntity updateVehiculo(VehiculoEntity vehiculo) {
         VehiculoEntity existingVehiculo = vehiculoRepo.findById(vehiculo.getPlaca()).orElse(null);
+        if (existingVehiculo == null) {
+            return null;
+        }
         existingVehiculo.setModelo(vehiculo.getModelo());
+        existingVehiculo.setMarca(vehiculo.getMarca());
         existingVehiculo.setPrecio(vehiculo.getPrecio());
         return vehiculoRepo.save(existingVehiculo);
     }
+
+    public Long calcImpuestoVehiculo(Long valorVehiCulo) {
+        return (long) (valorVehiCulo * 0.2);
+    }
+
+    public String calcSeguroVehiculo(String placa) {
+        VehiculoEntity vehiculo = vehiculoRepo.findById(placa).orElse(null);
+        if (vehiculo == null) {
+            return "Vehiculo no encontrado";
+        }
+        return calcImpuestoVehiculo(vehiculo.getPrecio()).toString();
+    }
+
 }

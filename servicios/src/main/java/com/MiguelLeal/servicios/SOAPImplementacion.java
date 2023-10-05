@@ -37,62 +37,62 @@ public class SOAPImplementacion {
         this.modelMapper = modelMapper;
     }
 
-    @WebMethod(operationName = "obtener")
-    public List<Usuario> getUsuarios() {
+    // @WebMethod(operationName = "obtener")
+    // public List<Usuario> getUsuarios() {
 
-        return datos.usuariosList;
-    }
+    //     return datos.usuariosList;
+    // }
 
-    @WebMethod(operationName = "adicionar")
-    public void addUsuario(@WebParam Usuario usuario) {
-        datos.adicionarUsuario(usuario);
-    }
+    // @WebMethod(operationName = "adicionar")
+    // public void addUsuario(@WebParam Usuario usuario) {
+    //     datos.adicionarUsuario(usuario);
+    // }
 
-    @WebMethod(operationName = "obtenerUniversidades")
-    public UniversidadesWrapper getUniversidades() {
-        UniversidadesWrapper wrapper = new UniversidadesWrapper();
-        for (Map.Entry<String, Universidad> entry : datos.universidadesList.entrySet()) {
-            UniversidadesWrapper.UniversidadEntry uniEntry = new UniversidadesWrapper.UniversidadEntry();
-            uniEntry.setKey(entry.getKey());
-            uniEntry.setValue(entry.getValue());
-            wrapper.getEntries().add(uniEntry);
-        }
-        return wrapper;
-    }
+    // @WebMethod(operationName = "obtenerUniversidades")
+    // public UniversidadesWrapper getUniversidades() {
+    //     UniversidadesWrapper wrapper = new UniversidadesWrapper();
+    //     for (Map.Entry<String, Universidad> entry : datos.universidadesList.entrySet()) {
+    //         UniversidadesWrapper.UniversidadEntry uniEntry = new UniversidadesWrapper.UniversidadEntry();
+    //         uniEntry.setKey(entry.getKey());
+    //         uniEntry.setValue(entry.getValue());
+    //         wrapper.getEntries().add(uniEntry);
+    //     }
+    //     return wrapper;
+    // }
 
-    @WebMethod(operationName = "adicionarUniversidad")
-    public void addUniversidad(@WebParam Universidad universidad) {
-        datos.adicionarUniversidad(universidad);
-    }
+    // @WebMethod(operationName = "adicionarUniversidad")
+    // public void addUniversidad(@WebParam Universidad universidad) {
+    //     datos.adicionarUniversidad(universidad);
+    // }
 
-    @WebMethod(operationName = "consultaUniversidad")
-    public Universidad consulta(@WebParam String nit) {
-        return new Universidad("nit", "nit");
-    }
+    // @WebMethod(operationName = "consultaUniversidad")
+    // public Universidad consulta(@WebParam String nit) {
+    //     return new Universidad("nit", "nit");
+    // }
 
-    @WebMethod(operationName = "dataIn")
-    public DatosEntrada DataIn(@WebParam String cedula) {
-        return new DatosEntrada(123, "28/9/23");
-    }
+    // @WebMethod(operationName = "dataIn")
+    // public DatosEntrada DataIn(@WebParam String cedula) {
+    //     return new DatosEntrada(123, "28/9/23");
+    // }
 
-    @WebMethod(operationName = "consultaSaldo")
-    public DatosSalida DataOut(@WebParam DatosEntrada datos) {
-        // System.out.println(datos.getCedula());
-        return new DatosSalida(23, 123, new Banco(123, "Miguel"));
-    }
+    // @WebMethod(operationName = "consultaSaldo")
+    // public DatosSalida DataOut(@WebParam DatosEntrada datos) {
+    //     // System.out.println(datos.getCedula());
+    //     return new DatosSalida(23, 123, new Banco(123, "Miguel"));
+    // }
 
     @WebMethod(operationName = "consultaVehiculoPlaca")
     public VehiculoEntity getVehiculo(@WebParam String placa) {
         return vehiculoService.getVehiculo(placa);
     }
 
-    @WebMethod(operationName = "ConsultaTodosVehiculos")
+    @WebMethod(operationName = "ConsultaTodosVehiculosExistentes")
     public List<VehiculoEntity> getVehiculos1() {
         return vehiculoService.getVehiculos();
     }
 
-    @WebMethod(operationName = "adicionarVehiculo1")
-    public VehiculoEntity addVehiCulo1(@WebParam VehiculoEntity vehiculo) {
+    @WebMethod(operationName = "adicionarVehiculo")
+    public String addVehiCulo1(@WebParam VehiculoEntity vehiculo) {
         return vehiculoService.saveVehiculo(vehiculo);
     }
 
@@ -106,21 +106,21 @@ public class SOAPImplementacion {
         return vehiculoService.updateVehiculo(vehiculo);
     }
 
-    @WebMethod(operationName = "VehiculoEntityaVehiculoDTO")
-    public Vehiculo VehiculoEntityaVehiculoDTO(@WebParam VehiculoEntity vehiculo) {
-        return modelMapper.map(vehiculo, Vehiculo.class);
-    }
+    // @WebMethod(operationName = "VehiculoEntityaVehiculoDTO")
+    // public Vehiculo VehiculoEntityaVehiculoDTO(@WebParam VehiculoEntity vehiculo) {
+    //     return modelMapper.map(vehiculo, Vehiculo.class);
+    // }
 
-    @WebMethod(operationName = "VehiculoDTOaVehiculoEntity")
-    public VehiculoEntity VehiculoDTOaVehiculoEntity(@WebParam Vehiculo vehiculo) {
-        return modelMapper.map(vehiculo, VehiculoEntity.class);
-    }
+    // @WebMethod(operationName = "VehiculoDTOaVehiculoEntity")
+    // public VehiculoEntity VehiculoDTOaVehiculoEntity(@WebParam Vehiculo vehiculo) {
+    //     return modelMapper.map(vehiculo, VehiculoEntity.class);
+    // }
 
-    @WebMethod(operationName = "VehiculoEntityaVehiculoDTOList")
-    public List<Vehiculo> VehiculoEntityaVehiculoDTOList(@WebParam List<VehiculoEntity> vehiculos) {
-        return vehiculos.stream().map(vehiculo -> modelMapper.map(vehiculo, Vehiculo.class))
-                .collect(java.util.stream.Collectors.toList());
-    }
+    // @WebMethod(operationName = "VehiculoEntityaVehiculoDTOList")
+    // public List<Vehiculo> VehiculoEntityaVehiculoDTOList(@WebParam List<VehiculoEntity> vehiculos) {
+    //     return vehiculos.stream().map(vehiculo -> modelMapper.map(vehiculo, Vehiculo.class))
+    //             .collect(java.util.stream.Collectors.toList());
+    // }
 
     @WebMethod(operationName = "VehiculoDTOaVehiculoEntityList")
     public List<VehiculoEntity> VehiculoDTOaVehiculoEntityList() {
@@ -135,9 +135,8 @@ public class SOAPImplementacion {
 
         return entities;
     }
-    
 
-    @WebMethod(operationName = "consultarVehiculo")
+    @WebMethod(operationName = "consultarVehiculosDTO")
     public VehiculosWrapper getVehiculos() {
         VehiculosWrapper wrapper = new VehiculosWrapper();
         for (Map.Entry<String, Vehiculo> entry : datos.VehiculosList.entrySet()) {
@@ -148,31 +147,35 @@ public class SOAPImplementacion {
         }
         return wrapper;
     }
-    
 
-    @WebMethod(operationName = "adicionarVehiculo")
-    public void addVehiculo(@WebParam Vehiculo vehiculo) {
-        datos.adicionarVehiculo(vehiculo);
+    // @WebMethod(operationName = "adicionarVehiculo")
+    // public void addVehiculo(@WebParam Vehiculo vehiculo) {
+    //     datos.adicionarVehiculo(vehiculo);
+    // }
+
+    // @WebMethod(operationName = "ConsultaValorSeguroVehiculoExistentePorPlaca")
+    // public long consultaValorSeguroVehiculo(@WebParam String placa) {
+    // if (datos.VehiculosList.get(placa) == null) {
+    //     return "No existe el vehiculo".hashCode();
+    // }
+    // if (datos.VehiculosList.get(placa).getModelo() < 2010) {
+    //     return datos.VehiculosList.get(placa).getPrecio() * 5 / 100;
+    // }
+    // if (datos.VehiculosList.get(placa).getModelo() < 2015) {
+    //     return datos.VehiculosList.get(placa).getPrecio() * 7 / 100;
+    // }
+    // if (datos.VehiculosList.get(placa).getModelo() < 2020) {
+    //     return datos.VehiculosList.get(placa).getPrecio() * 9 / 100;
+    // }
+    // if (datos.VehiculosList.get(placa).getModelo() > 2021) {
+    //     return datos.VehiculosList.get(placa).getPrecio() * 11 / 100;
+    // }
+    // return datos.VehiculosList.get(placa).getPrecio() * 1 / 100;
+    // }
+
+    // calcular Seguro con VehiculoDTO utilizando VehiculoEntity
+    @WebMethod(operationName = "calcularSeguroVehiculoPorPlaca")
+    public String calcularImpuesto(@WebParam(name = "Placa") String placa) {
+        return vehiculoService.calcSeguroVehiculo(placa);
     }
-
-    @WebMethod(operationName = "ConsultaValorSeguroVehiculo")
-    public long consultaValorSeguroVehiculo(@WebParam String placa) {
-        if (datos.VehiculosList.get(placa) == null) {
-            return "No existe el vehiculo".hashCode();
-        }
-        if (datos.VehiculosList.get(placa).getModelo() < 2010) {
-            return datos.VehiculosList.get(placa).getPrecio() * 5 / 100;
-        }
-        if (datos.VehiculosList.get(placa).getModelo() < 2015) {
-            return datos.VehiculosList.get(placa).getPrecio() * 7 / 100;
-        }
-        if (datos.VehiculosList.get(placa).getModelo() < 2020) {
-            return datos.VehiculosList.get(placa).getPrecio() * 9 / 100;
-        }
-        if (datos.VehiculosList.get(placa).getModelo() > 2021) {
-            return datos.VehiculosList.get(placa).getPrecio() * 11 / 100;
-        }
-        return datos.VehiculosList.get(placa).getPrecio() * 1 / 100;
-    }
-
 }
