@@ -72,6 +72,15 @@ public class VehiculoService {
         if (vehiculo == null) {
             return "Vehiculo no encontrado";
         }
+        if (vehiculo.getModelo() < 2010) {
+            return calcImpuestoVehiculo(vehiculo.getPrecio() * 5 / 100).toString();
+        }else if (vehiculo.getModelo() < 2015) {
+            return calcImpuestoVehiculo(vehiculo.getPrecio() * 7 / 100).toString();
+        }else if (vehiculo.getModelo() < 2020) {
+            return calcImpuestoVehiculo(vehiculo.getPrecio() * 9 / 100).toString();
+        }else if (vehiculo.getModelo() > 2021) {
+            return calcImpuestoVehiculo(vehiculo.getPrecio() * 11 / 100).toString();
+        }
         return calcImpuestoVehiculo(vehiculo.getPrecio()).toString();
     }
 
