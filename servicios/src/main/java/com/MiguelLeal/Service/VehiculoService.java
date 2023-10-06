@@ -63,6 +63,10 @@ public class VehiculoService {
         return (long) (valorVehiCulo * 0.2);
     }
 
+    public Long calcImpuestoGobiernoVehiculo(Long valorVehiCulo) {
+        return (long) (valorVehiCulo * 0.1);
+    }
+
     public String calcSeguroVehiculo(String placa) {
         VehiculoEntity vehiculo = vehiculoRepo.findById(placa).orElse(null);
         if (vehiculo == null) {

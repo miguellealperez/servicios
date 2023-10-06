@@ -82,7 +82,7 @@ public class SOAPImplementacion {
     // }
 
     @WebMethod(operationName = "consultaVehiculoPlaca")
-    public VehiculoEntity getVehiculo(@WebParam String placa) {
+    public VehiculoEntity getVehiculo(@WebParam(name = "DigitePlaca") String placa) {
         return vehiculoService.getVehiculo(placa);
     }
 
@@ -92,17 +92,17 @@ public class SOAPImplementacion {
     }
 
     @WebMethod(operationName = "adicionarVehiculo")
-    public String addVehiCulo1(@WebParam VehiculoEntity vehiculo) {
+    public String addVehiCulo1(@WebParam(name = "DigiteDatosVehiculo") VehiculoEntity vehiculo) {
         return vehiculoService.saveVehiculo(vehiculo);
     }
 
     @WebMethod(operationName = "eliminarVehiculo")
-    public String deleteVehiculo(@WebParam String placa) {
+    public String deleteVehiculo(@WebParam(name = "DigitePlaca") String placa) {
         return vehiculoService.deleteVehiculo(placa);
     }
 
     @WebMethod(operationName = "actualizarVehiculo")
-    public VehiculoEntity updateVehiculo(@WebParam VehiculoEntity vehiculo) {
+    public VehiculoEntity updateVehiculo(@WebParam(name = "DigiteDatosVehiculo") VehiculoEntity vehiculo) {
         return vehiculoService.updateVehiculo(vehiculo);
     }
 
@@ -175,7 +175,13 @@ public class SOAPImplementacion {
 
     // calcular Seguro con VehiculoDTO utilizando VehiculoEntity
     @WebMethod(operationName = "calcularSeguroVehiculoPorPlaca")
-    public String calcularImpuesto(@WebParam(name = "Placa") String placa) {
+    public String calcularImpuesto(@WebParam(name = "DigitePlaca") String placa) {
         return vehiculoService.calcSeguroVehiculo(placa);
+    }
+
+    //calcula el impuesto de un vehiculo
+    @WebMethod(operationName = "calcularImpuestoVehiculoPorPlaca")
+    public long calcularSeguro(@WebParam(name = "DigitePlaca") String placa) {
+        return vehiculoService.calcImpuestoGobiernoVehiculo(vehiculoService.getVehiculo(placa).getPrecio());
     }
 }
