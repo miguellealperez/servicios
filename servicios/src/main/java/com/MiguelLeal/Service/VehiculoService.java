@@ -36,7 +36,7 @@ public class VehiculoService {
             return "Placa debe tener 6 caracteres";
         }else if(vehiculo.getModelo() < 1950 || vehiculo.getModelo() > 2022){
             return "Modelo debe estar entre 1950 y 2022";
-        }else if(vehiculo.getPrecio() < 0){
+        }else if(vehiculo.getPrecio() <= 0){
             return "Precio debe ser mayor a 0";
         }
         vehiculoRepo.save(vehiculo);
@@ -48,15 +48,22 @@ public class VehiculoService {
         return "Vehiculo eliminado: " + placa;
     }
 
-    public VehiculoEntity updateVehiculo(VehiculoEntity vehiculo) {
+    public String updateVehiculo(VehiculoEntity vehiculo) {
         VehiculoEntity existingVehiculo = vehiculoRepo.findById(vehiculo.getPlaca()).orElse(null);
         if (existingVehiculo == null) {
-            return null;
+            return "Vehiculo no existe en el sistema, no se puede actualizar";
+        }else if(vehiculo.getPlaca().length() != 6){
+            return "Placa debe tener 6 caracteres";
+        }else if(vehiculo.getModelo() < 1950 || vehiculo.getModelo() > 2022){
+            return "Modelo debe estar entre 1950 y 2022";
+        }else if(vehiculo.getPrecio() <= 0){
+            return "Precio debe ser mayor a 0";
         }
         existingVehiculo.setModelo(vehiculo.getModelo());
         existingVehiculo.setMarca(vehiculo.getMarca());
         existingVehiculo.setPrecio(vehiculo.getPrecio());
-        return vehiculoRepo.save(existingVehiculo);
+        vehiculoRepo.save(existingVehiculo);
+        return "Vehiculo actualizado: " + vehiculo.getPlaca();
     }
 
     public Long calcImpuestoVehiculo(Long valorVehiCulo) {
@@ -82,6 +89,30 @@ public class VehiculoService {
             return calcImpuestoVehiculo(vehiculo.getPrecio() * 11 / 100).toString();
         }
         return calcImpuestoVehiculo(vehiculo.getPrecio()).toString();
+    }
+
+    public long calcSOATVehiculo(long precio) {
+        return (long) (precio * 0.05);
+    }
+
+    public String calcSeguroSOAT(String placa) {
+        VehiculoEntity vehiculo = vehiculoRepo.findById(placa).orElse(null);
+        if (vehiculo == null) {
+            return "Vehiculo no encontrado";
+        }
+        return Long.valueOf(calcSOATVehiculo(vehiculo.getPrecio())).toString();
+    }
+
+    public long calcSeguroObligatorioVehiculo(long precio) {
+        return (long) (precio * 0.2);
+    }
+
+    public String calcSeguroObligatorio(String placa) {
+        VehiculoEntity vehiculo = vehiculoRepo.findById(placa).orElse(null);
+        if (vehiculo == null) {
+            return "Vehiculo no encontrado";
+        }
+        return Long.valueOf(calcSeguroObligatorioVehiculo(vehiculo.getPrecio())).toString();
     }
 
 }
