@@ -10,7 +10,7 @@ public class DatabaseConnection {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://185.212.70.103:3306/u435121734_ML23", "u435121734_ML", "o94&[h;Z4");
             if (conn != null) {
-                System.out.println("Connected");
+                System.out.println("DB Connected");
             }
         } catch (SQLException ex) {
             System.out.println("An error occurred. " + ex.getMessage());
